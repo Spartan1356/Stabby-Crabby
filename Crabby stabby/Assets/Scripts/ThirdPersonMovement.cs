@@ -8,12 +8,13 @@ public class ThirdPersonMovement : MonoBehaviour
     public CharacterController controller;
     public Transform cam;
 
-    public float jump = 20f;
+    public float jump = 13f;
     public float speedX = 6f;
     public float speedY = 2f;
     public float gravity = -9.81f;
     Vector3 velocity;
     bool isGrounded;
+
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -39,14 +40,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            if (Input.GetKey("a")|| Input.GetKey("d"))
+            if (Input.GetKey("a") || Input.GetKey("d"))
             {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speedX * Time.deltaTime);
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDir.normalized * speedX * Time.deltaTime);
             }
             if (Input.GetKey("w") || Input.GetKey("s"))
             {
@@ -62,8 +63,8 @@ public class ThirdPersonMovement : MonoBehaviour
                 }
                 else
                 {
-                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                controller.Move(moveDir.normalized * speedY * Time.deltaTime);
+                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                    controller.Move(moveDir.normalized * speedY * Time.deltaTime);
                 }
 
             }
